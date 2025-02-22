@@ -25,23 +25,23 @@ st.title("🩺 CAD Risk Estimator - 10-Year Prediction")
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    age = st.number_input("Current Age")
+    age = st.number_input("Current Age", min_value=20, max_value=79, step=1, format="%d")
     sex = st.radio("Sex", ["Male", "Female"], index=None)
     race = st.radio("Race", ["White", "African American", "Other"], index=None)
     bmi = st.number_input("BMI")
-    sbp = st.number_input("Systolic Blood Pressure (mmHg)")
-    dbp = st.number_input("Diastolic Blood Pressure (mmHg)")
+    sbp = st.number_input("Systolic Blood Pressure (mmHg)", help="Enter the value must be between 90 - 200")
+    dbp = st.number_input("Diastolic Blood Pressure (mmHg)", help="Enter the value must be between 60 - 130")
     
 with col2:
-    total_cholesterol = st.number_input("Total Cholesterol (mg/dL)")
-    ldl = st.number_input("LDL Cholesterol (mg/dL)")
-    hdl = st.number_input("HDL Cholesterol (mg/dL)")
-    triglycerides = st.number_input("Triglycerides (mg/dL)")
+    total_cholesterol = st.number_input("Total Cholesterol (mg/dL)", help="Enter the value must be between 130 - 320")
+    ldl = st.number_input("LDL Cholesterol (mg/dL)", help="Enter the value must be between 30 - 300")
+    hdl = st.number_input("HDL Cholesterol (mg/dL)", help="Enter the value must be between 20 - 100")
+    triglycerides = st.number_input("Triglycerides (mg/dL)", help="Enter the value must be between 50 - 400")
     
 with col3:
-    heart_rate = st.number_input("Heart Rate (BPM)")
-    resting_hr = st.number_input("Resting Heart Rate (BPM)")
-    hrv = st.number_input("HRV (Heart Rate Variability)")
+    heart_rate = st.number_input("Heart Rate (BPM)", help="Enter the value must be between 40 - 120")
+    resting_hr = st.number_input("Resting Heart Rate (BPM)", help="Enter the value must be between 40 - 100")
+    hrv = st.number_input("HRV (Heart Rate Variability)", help="Enter the value must be between 10 - 100")
     smoking = st.radio("Smoking", ["Yes", "No"], index=None)
     diabetes = st.radio("Diabetes", ["Yes", "No"], index=None)
 
