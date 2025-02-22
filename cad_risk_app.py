@@ -29,19 +29,28 @@ with col1:
     sex = st.radio("Sex", ["Male", "Female"], index=None)
     race = st.radio("Race", ["White", "African American", "Other"], index=None)
     bmi = st.number_input("BMI")
-    sbp = st.number_input("Systolic Blood Pressure (mmHg)", help="Enter the value must be between 90 - 200")
-    dbp = st.number_input("Diastolic Blood Pressure (mmHg)", help="Enter the value must be between 60 - 130")
+    sbp = st.number_input("Systolic Blood Pressure (mmHg)")
+st.caption("Value must be between 90 - 200")
+    dbp = st.number_input("Diastolic Blood Pressure (mmHg)")
+st.caption("Value must be between 60 - 130")
     
 with col2:
-    total_cholesterol = st.number_input("Total Cholesterol (mg/dL)", help="Enter the value must be between 130 - 320")
-    ldl = st.number_input("LDL Cholesterol (mg/dL)", help="Enter the value must be between 30 - 300")
-    hdl = st.number_input("HDL Cholesterol (mg/dL)", help="Enter the value must be between 20 - 100")
-    triglycerides = st.number_input("Triglycerides (mg/dL)", help="Enter the value must be between 50 - 400")
+    total_cholesterol = st.number_input("Total Cholesterol (mg/dL)")
+st.caption("Value must be between 130 - 320")
+    ldl = st.number_input("LDL Cholesterol (mg/dL)")
+st.caption("Value must be between 30 - 300")
+    hdl = st.number_input("HDL Cholesterol (mg/dL)")
+st.caption("Value must be between 20 - 100")
+    triglycerides = st.number_input("Triglycerides (mg/dL)")
+st.caption("Value must be between 50 - 400")
     
 with col3:
-    heart_rate = st.number_input("Heart Rate (BPM)", help="Enter the value must be between 40 - 120")
-    resting_hr = st.number_input("Resting Heart Rate (BPM)", help="Enter the value must be between 40 - 100")
-    hrv = st.number_input("HRV (Heart Rate Variability)", help="Enter the value must be between 10 - 100")
+    heart_rate = st.number_input("Heart Rate (BPM)")
+st.caption("Value must be between 40 - 120")
+    resting_hr = st.number_input("Resting Heart Rate (BPM)")
+st.caption("Value must be between 40 - 100")
+    hrv = st.number_input("HRV (Heart Rate Variability)")
+st.caption("Value must be between 10 - 100")
     smoking = st.radio("Smoking", ["Yes", "No"], index=None)
     diabetes = st.radio("Diabetes", ["Yes", "No"], index=None)
 
@@ -51,6 +60,9 @@ diabetes = 1 if diabetes == "Yes" else 0
 
 # Calculate Risk Button
 if st.button("Calculate Risk"):
+    if not all([age, bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv]) or sex is None or race is None:
+        st.warning("Please fill in all fields before calculating risk.")
+    else:
     risk_label, risk_icon, risk_score = calculate_cad_risk(age, bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv, smoking, diabetes)
     st.markdown(f"### 🎯 Predicted 10-Year CAD Risk: {risk_icon} {risk_label}")
     st.markdown(f"📊 Estimated 10-Year Risk Score: **{risk_score:.2f}%**")
