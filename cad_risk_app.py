@@ -25,7 +25,7 @@ st.title("🩺 CAD Risk Estimator - 10-Year Prediction")
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    age = st.number_input("Current Age *", value=None, placeholder="")  min_value=30, max_value=70, step=1, format="%d")
+    age = st.number_input("Current Age *", min_value=30, max_value=70, step=1, format="%d")
     st.caption("Age must be between 30 - 70")
     sex = st.radio("Sex", ["Male", "Female"], index=None)
     race = st.radio("Race", ["White", "African American", "Other"], index=None)
