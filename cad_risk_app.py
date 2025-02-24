@@ -83,7 +83,22 @@ if st.button("Calculate Risk"):
         st.markdown(f"📊 Estimated 10-Year Risk Score: **{risk_score:.2f}%**")
         
         # Visualization: Risk Distribution
-        # Comparison Graph (User values vs. Ideal values)
+        # Enhanced Comparison Graph (User values vs. Ideal values)
+        fig2, ax2 = plt.subplots(figsize=(10, 6))
+        metrics = ['BMI', 'SBP', 'DBP', 'Total Chol.', 'LDL', 'HDL', 'Trigly.', 'HR', 'RHR', 'HRV']
+        user_values = [bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv]
+        ideal_values = [22, 120, 80, 180, 100, 55, 150, 70, 60, 75]
+        
+        x = np.arange(len(metrics))
+        ax2.plot(metrics, user_values, marker='o', linestyle='-', color='blue', label='Your Values')
+        ax2.plot(metrics, ideal_values, marker='o', linestyle='--', color='green', label='Ideal Values')
+        
+        ax2.set_xticks(x)
+        ax2.set_xticklabels(metrics, rotation=45)
+        ax2.set_ylabel("Measurement Values")
+        ax2.set_title("Comparison of User vs. Ideal Health Metrics")
+        ax2.legend()
+        st.pyplot(fig2)
         fig2, ax2 = plt.subplots(figsize=(8, 5))
         metrics = ['BMI', 'SBP', 'DBP', 'Total Chol.', 'LDL', 'HDL', 'Trigly.', 'HR', 'RHR', 'HRV']
         user_values = [bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv]
