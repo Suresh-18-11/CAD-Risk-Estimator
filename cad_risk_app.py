@@ -2,7 +2,12 @@ import streamlit as st
 import numpy as np
 try:
     import matplotlib.pyplot as plt
-    try:
+    import seaborn as sns
+    SEABORN_AVAILABLE = True
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    SEABORN_AVAILABLE = False
+    MATPLOTLIB_AVAILABLE = False
     import seaborn as sns
     SEABORN_AVAILABLE = True
 except ImportError:
