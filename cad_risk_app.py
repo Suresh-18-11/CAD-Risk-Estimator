@@ -1,28 +1,6 @@
 import streamlit as st
 import numpy as np
-try:
-    import matplotlib.pyplot as plt
-    SEABORN_AVAILABLE = True
-    MATPLOTLIB_AVAILABLE = True
-    try:
-        import seaborn as sns
-    except ImportError:
-        SEABORN_AVAILABLE = False
-except ImportError:
-    SEABORN_AVAILABLE = False
-    MATPLOTLIB_AVAILABLE = False
-    SEABORN_AVAILABLE = True
-    MATPLOTLIB_AVAILABLE = True
-except ImportError:
-    SEABORN_AVAILABLE = False
-    MATPLOTLIB_AVAILABLE = False
-    import seaborn as sns
-    SEABORN_AVAILABLE = True
-except ImportError:
-    SEABORN_AVAILABLE = False
-    MATPLOTLIB_AVAILABLE = True
-except ImportError:
-    MATPLOTLIB_AVAILABLE = False
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 def calculate_cad_risk(age, bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv, smoking, diabetes):
@@ -82,24 +60,8 @@ if st.button("Calculate Risk"):
         st.markdown(f"### 🎯 Predicted 10-Year CAD Risk: {risk_icon} {risk_label}")
         st.markdown(f"📊 Estimated 10-Year Risk Score: **{risk_score:.2f}%**")
         
-        # Visualization: Risk Distribution
         # Enhanced Comparison Graph (User values vs. Ideal values)
         fig2, ax2 = plt.subplots(figsize=(10, 6))
-        metrics = ['BMI', 'SBP', 'DBP', 'Total Chol.', 'LDL', 'HDL', 'Trigly.', 'HR', 'RHR', 'HRV']
-        user_values = [bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv]
-        ideal_values = [22, 120, 80, 180, 100, 55, 150, 70, 60, 75]
-        
-        x = np.arange(len(metrics))
-        ax2.plot(metrics, user_values, marker='o', linestyle='-', color='blue', label='Your Values')
-        ax2.plot(metrics, ideal_values, marker='o', linestyle='--', color='green', label='Ideal Values')
-        
-        ax2.set_xticks(x)
-        ax2.set_xticklabels(metrics, rotation=45)
-        ax2.set_ylabel("Measurement Values")
-        ax2.set_title("Comparison of User vs. Ideal Health Metrics")
-        ax2.legend()
-        st.pyplot(fig2)
-        fig2, ax2 = plt.subplots(figsize=(8, 5))
         metrics = ['BMI', 'SBP', 'DBP', 'Total Chol.', 'LDL', 'HDL', 'Trigly.', 'HR', 'RHR', 'HRV']
         user_values = [bmi, sbp, dbp, total_cholesterol, ldl, hdl, triglycerides, heart_rate, resting_hr, hrv]
         ideal_values = [22, 120, 80, 180, 100, 55, 150, 70, 60, 75]
@@ -114,22 +76,3 @@ if st.button("Calculate Risk"):
         ax2.set_title("User vs. Ideal Health Standards")
         ax2.legend()
         st.pyplot(fig2)
-        fig, ax = plt.subplots()
-        categories = ['Low Risk', 'Moderate Risk', 'High Risk']
-        values = [10, 20, 30]  # Example benchmark values
-        user_value = [risk_score]
-        
-        ax.bar(categories, values, color=['green', 'yellow', 'red'], alpha=0.5, label="Benchmark")
-        ax.bar(['User Score'], user_value, color='blue', label="Your Score")
-        ax.set_ylabel("Risk Score")
-        ax.set_title("Risk Score Distribution")
-        ax.legend()
-        st.pyplot(fig)
-        
-        # Health Suggestions Based on Risk
-        if risk_score < 10:
-            st.success("✅ Your risk is low! Maintain a healthy lifestyle with regular exercise and a balanced diet.")
-        elif 10 <= risk_score < 20:
-            st.warning("⚠️ Your risk is moderate. Consider reducing cholesterol intake and exercising more.")
-        else:
-            st.error("🚨 Your risk is high! Consult a doctor for medical evaluation and lifestyle changes.")
